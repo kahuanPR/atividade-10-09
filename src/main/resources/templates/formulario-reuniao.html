@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulário de Reunião</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1 th:text="${reuniao.id == null ? 'Criar Reunião' : 'Editar Reunião'}"></h1>
+
+    <form th:action="@{/reunioes/salvar}" th:object="${reuniao}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <label for="titulo">Título:</label>
+        <input type="text" id="titulo" th:field="*{titulo}" required/>
+        <br/>
+
+        <label for="dataHoraInicio">Data e Hora de Início:</label>
+        <input type="datetime-local" id="dataHoraInicio" th:field="*{dataHoraInicio}" required/>
+        <br/>
+
+        <label for="dataHoraFim">Data e Hora de Término:</label>
+        <input type="datetime-local" id="dataHoraFim" th:field="*{dataHoraFim}" required/>
+        <br/>
+
+        <label for="pauta">Pauta:</label>
+        <textarea id="pauta" th:field="*{pauta}"></textarea>
+        <br/>
+
+        <label for="descricao">Descrição:</label>
+        <textarea id="descricao" th:field="*{descricao}"></textarea>
+        <br/>
+
+        <label for="setor">Setor:</label>
+        <input type="text" id="setor" th:field="*{setor}"/>
+        <br/>
+
+        <label for="publica">Pública:</label>
+        <input type="checkbox" id="publica" th:field="*{publica}"/>
+        <br/>
+
+        <button type="submit">Salvar</button>
+    </form>
+    
+    <a href="/">Voltar</a>
+</body>
+</html>
