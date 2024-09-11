@@ -2,23 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Formulário de Reunião</title>
-    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1 th:text="${reuniao.id == null ? 'Criar Reunião' : 'Editar Reunião'}"></h1>
-
+    <h1 th:text="${reuniao.id == null ? 'Nova Reunião' : 'Editar Reunião'}"></h1>
     <form th:action="@{/reunioes/salvar}" th:object="${reuniao}" method="post">
-        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{id}" />
+
         <label for="titulo">Título:</label>
-        <input type="text" id="titulo" th:field="*{titulo}" required/>
+        <input type="text" id="titulo" th:field="*{titulo}" />
         <br/>
 
         <label for="dataHoraInicio">Data e Hora de Início:</label>
-        <input type="datetime-local" id="dataHoraInicio" th:field="*{dataHoraInicio}" required/>
+        <input type="datetime-local" id="dataHoraInicio" th:field="*{dataHoraInicio}" />
         <br/>
 
-        <label for="dataHoraFim">Data e Hora de Término:</label>
-        <input type="datetime-local" id="dataHoraFim" th:field="*{dataHoraFim}" required/>
+        <label for="dataHoraFim">Data e Hora de Fim:</label>
+        <input type="datetime-local" id="dataHoraFim" th:field="*{dataHoraFim}" />
         <br/>
 
         <label for="pauta">Pauta:</label>
@@ -30,16 +29,37 @@
         <br/>
 
         <label for="setor">Setor:</label>
-        <input type="text" id="setor" th:field="*{setor}"/>
+        <input type="text" id="setor" th:field="*{setor}" />
         <br/>
 
         <label for="publica">Pública:</label>
-        <input type="checkbox" id="publica" th:field="*{publica}"/>
+        <input type="checkbox" id="publica" th:field="*{publica}" />
+        <br/>
+
+        <label for="palavrasChave">Palavras-chave:</label>
+        <input type="text" id="palavrasChave" th:field="*{palavrasChave}" />
+        <br/>
+
+        <label for="emissor">Emissor:</label>
+        <select id="emissor" th:field="*{emissor.id}">
+            <option th:each="funcionario : ${funcionarios}" th:value="${funcionario.id}" th:text="${funcionario.nome}"></option>
+        </select>
+        <br/>
+
+        <label for="participantes">Participantes:</label>
+        <select multiple id="participantes" th:field="*{participantes}">
+            <option th:each="participante : ${participantes}" th:value="${participante.id}" th:text="${participante.nome}"></option>
+        </select>
+        <br/>
+
+        <label for="estado">Estado:</label>
+        <select id="estado" th:field="*{estado}">
+            <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado}"></option>
+        </select>
         <br/>
 
         <button type="submit">Salvar</button>
     </form>
-    
-    <a href="/">Voltar</a>
+    <a href="/reunioes">Voltar para a Lista</a>
 </body>
 </html>
