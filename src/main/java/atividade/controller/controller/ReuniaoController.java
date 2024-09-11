@@ -1,11 +1,13 @@
-package atividade.controller;
+package atividade.controller.controller;
 
-import com.example.Atividade.Reuniao;
-import atividade.service.ReuniaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import com.example.Atividade.Atividade.model.Reuniao;
+
+import atividade.service.Reuniaoservice.ReuniaoService;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,13 +19,13 @@ public class ReuniaoController {
     @Autowired
     private ReuniaoService reuniaoService;
 
-    // Página inicial
+
     @GetMapping("/index")
     public String index() {
-        return "index"; // Nome do template Thymeleaf para a página inicial
+        return "index"; // 
     }
 
-    // Listar todas as reuniões
+
     @GetMapping
     public String listarReunioes(Model model) {
         List<Reuniao> reunioes = reuniaoService.listarReunioes();
@@ -31,11 +33,11 @@ public class ReuniaoController {
         return "listar-reunioes";  
     }
 
-    // Formulário para nova reunião
+   
     @GetMapping("/novo")
     public String novoFormulario(Model model) {
-//        model.addAttribute("reuniao", new Reuniao());
-        return "formulario-reuniao";  
+     model.addAttribute("reuniao", new Reuniao());
+        return "formulario-reuniao/index";  
     }
 
     // Salvar reunião (POST)
